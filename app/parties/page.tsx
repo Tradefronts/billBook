@@ -1,11 +1,17 @@
 import {
+  ArrowRight,
   ChevronDown,
   EllipsisVertical,
+  Layers,
   Link2,
+  MoveRight,
   Search,
   Settings,
+  SquarePen,
+  Trash2,
   Users,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Parties = () => {
@@ -66,12 +72,13 @@ const Parties = () => {
             <span className="text-xl font-semibold">RS 100</span>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+
+        <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button className="p-2.5 border rounded-md border-gray-300 hover:border-gray-500 cursor-pointer">
+            <button className="p-2.5 border rounded-sm border-gray-300 hover:border-gray-500 cursor-pointer">
               <Search size={15} className="text-gray-500" />
             </button>
-            <div className="border border-gray-300 rounded-md text-sm relative w-56">
+            <div className="border border-gray-300 rounded-sm text-sm relative w-56">
               <input
                 type="text"
                 placeholder="Search Categories"
@@ -82,13 +89,33 @@ const Parties = () => {
               </span>
             </div>
           </div>
-          <div className=" flex items-center gap-4">
-            <button className="rounded-md border p-2 border-gray-300 text-gray-500 text-sm flex items-center gap-2 font-light">
-              Bulk Actions <ChevronDown size={20} />
-            </button>
-            <button className="rounded-md border py-2 px-4 text-white  border-gray-300 bg-[#4c3cce] text-sm flex items-center gap-2 font-light">
-              Create Party
-            </button>
+          <div className=" flex items-center gap-4 ">
+            <div className="relative">
+              <button className="rounded-sm border p-2 border-gray-300 text-gray-500 text-sm flex items-center gap-2 font-light">
+                <Layers size={15} /> Bulk Actions <ChevronDown size={20} />
+              </button>
+              <div className="absolute  w-68 bg-white border border-gray-300 z-1 p-2 leading-2 shadow-lg rounded-md shadow-gray-300">
+                <div className=" text-gray-500 flex items-center justify-between">
+                  <span
+                    className="block text-sm
+                  "
+                  >
+                    Bulk Add Parties
+                  </span>
+                  <span className="">
+                    <ArrowRight size={20} />
+                  </span>
+                </div>
+                <span className="text-xs">
+                  Quickly add all your parties with Excel
+                </span>
+              </div>
+            </div>
+            <Link href="/add-party">
+              <button className="rounded-sm border py-2 px-4 text-white cursor-pointer  border-gray-300 bg-[#6a59ee] text-sm flex items-center gap-2 font-light">
+                Create Party
+              </button>
+            </Link>
           </div>
         </div>
         <div className=" border rounded-lg border-gray-300">
@@ -125,13 +152,19 @@ const Parties = () => {
                   1234567890
                 </td>
                 <td className="text-start px-5 py-2 text-sm text-gray-600">
-                  Customer{" "}
+                  Customer
                 </td>
                 <td className="text-start px-5 py-2 text-sm text-gray-600">
                   RS 15
                 </td>
-                <td className="text-center px-5 py-2 text-sm text-gray-600">
-                  <button className="p-2 group-hover:bg-red-100 rounded-md"><EllipsisVertical size={20} /></button>
+                <td className="text-center px-5 py-2 text-sm text-gray-600 relative">
+                  <button className="p-2 hover:bg-red-100 rounded-md">
+                    <EllipsisVertical size={20} />
+                  </button>
+                  {/* <div className="w-48 divide-y divide-gray-300 shadow-md shadow-gray-300 absolute -left-20 border bg-white border-gray-300 rounded-md">
+                    <span className="block p-3 flex items-center gap-1 "><SquarePen size={15} />Edit</span>
+                    <span className="block p-3 flex items-center gap-1 text-red-400"><Trash2 size={15} className="" />Delete</span>
+                  </div> */}
                 </td>
               </tr>
               <tr className="w-full divide-x p-2 divide-gray-300 hover:bg-[#f1f0fc] ">
@@ -145,13 +178,19 @@ const Parties = () => {
                   1234567890
                 </td>
                 <td className="text-start px-5 py-2 text-sm text-gray-600">
-                  Customer{" "}
+                  Customer
                 </td>
                 <td className="text-start px-5 py-2 text-sm text-gray-600">
                   RS 15
                 </td>
-                <td className="text-center px-5 py-2 text-sm text-gray-600">
-                  <button className="p-2 hover:bg-red-100 rounded-md"><EllipsisVertical size={20} /></button>
+                <td className="text-center px-5 py-2 text-sm text-gray-600 relative">
+                  <button className="p-2 hover:bg-red-100 rounded-md">
+                    <EllipsisVertical size={20} />
+                  </button>
+                  {/* <div className="w-48 divide-y divide-gray-300 shadow-md shadow-gray-300 absolute -left-20 border bg-white border-gray-300 rounded-md">
+                    <span className="block p-3 flex items-center gap-1 "><SquarePen size={15}/>Edit</span>
+                    <span className="block p-3 flex items-center gap-1 text-red-400"><Trash2 size={15} className=""/>Delete</span>
+                  </div> */}
                 </td>
               </tr>
             </tbody>
