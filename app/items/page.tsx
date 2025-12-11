@@ -40,6 +40,7 @@ const page = () => {
       </header>
       <div className="flex w-full p-4 gap-4">
         <div className="w-1/2 h-18 border-gray-300 border rounded-lg p-2">
+          
           <div className="flex justify-between items-center text-sm">
             <span className="flex gap-2 items-center text-blue-500">
               <TrendingUp size={15} /> Stock Value

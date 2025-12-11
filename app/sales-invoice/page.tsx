@@ -1,3 +1,4 @@
+import DropdownMenu from "@/components/DropdownMenu";
 import {
   ArrowRight,
   ChevronDown,
@@ -19,18 +20,8 @@ const SalesInvoice = () => {
         <div className="flex items-center justify-between">
           <h5 className="font-medium text-xl ">Sales Invoices</h5>
           <div className="flex items-center gap-4">
-            <div className="border rounded-sm px-3 py-2 text-xs border-blue-400 text-blue-400 ">
-              <label htmlFor="my-dropdown" className="font-light">
-                Reports
-              </label>
-              <select id="my-dropdown" className="border-none text-gray-400 ">
-                <option value=""></option>
-                <option value="option1">Partywise Outstanding</option>
-                <option value="option2">Item Report By Party</option>
-                <option value="option3">Receivable Ageing Report</option>
-              </select>
-            </div>
-            <button className="p-2 border rounded-sm border-gray-300">
+            <DropdownMenu menus={["Sales","GSTR-1 (Sales)","DayBook","Bill Wise Profit"]}/>
+            <button className="p-2 border rounded-xs border-gray-300">
               <Settings size={15} />
             </button>
             <div></div>
@@ -98,10 +89,11 @@ const SalesInvoice = () => {
                   Bulk download
                 </div> */}
               </div>
-                  <Link href="/create-sales-invoice">
-<button className="rounded-sm border py-2 px-4 text-white  border-gray-300 bg-[#4c3cce] text-sm flex items-center gap-2 font-light">
-                Create Sales Invoice
-              </button></Link>
+              <Link href="/create-sales-invoice">
+                <button className="rounded-sm border py-2 px-4 text-white  border-gray-300 bg-[#4c3cce] text-sm flex items-center gap-2 font-light">
+                  Create Sales Invoice
+                </button>
+              </Link>
             </div>
           </div>
 

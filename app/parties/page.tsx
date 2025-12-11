@@ -1,3 +1,4 @@
+"use client"
 import {
   ArrowRight,
   ChevronDown,
@@ -12,30 +13,25 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import DropdownMenu from "@/components/DropdownMenu";
 
 const Parties = () => {
+
+
+  const [IsBulkClicked, setIsBulkClicked]=useState(false)
+
   return (
     <div className="w-full p-5 ">
       <div className="space-y-5">
         <div className="flex items-center justify-between">
           <h5 className="font-medium text-xl">Parties</h5>
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1 border rounded-sm px-3 py-2  border-purple-600 text-purple-700 font-light text-xs">
+            <button className="flex items-center gap-1 border rounded-xs px-3 py-2  border-purple-600 text-purple-700 font-light text-xs">
               <Link2 size={15} /> SharedLedger Portal
             </button>
-            <div className="border rounded-sm px-3 py-2 text-xs border-blue-400 text-blue-400 ">
-              <label htmlFor="my-dropdown" className="font-light">
-                Reports
-              </label>
-              <select id="my-dropdown" className="border-none text-gray-400 ">
-                <option value=""></option>
-                <option value="option1">Partywise Outstanding</option>
-                <option value="option2">Item Report By Party</option>
-                <option value="option3">Receivable Ageing Report</option>
-              </select>
-            </div>
-            <button className="p-2 border rounded-sm border-gray-300">
+              <DropdownMenu/>
+            <button className="p-2 border rounded-xs border-gray-300">
               <Settings size={15} />
             </button>
             <div></div>
@@ -91,13 +87,13 @@ const Parties = () => {
           </div>
           <div className=" flex items-center gap-4 ">
             <div className="relative">
-              <button className="rounded-sm border p-2 border-gray-300 text-gray-500 text-sm flex items-center gap-2 font-light">
+              <button onClick={()=>setIsBulkClicked(!IsBulkClicked)} className="cusor-pointer rounded-sm border p-2 border-gray-300 text-gray-500 text-sm  flex items-center gap-2">
                 <Layers size={15} /> Bulk Actions <ChevronDown size={20} />
               </button>
-              <div className="absolute  w-68 bg-white border border-gray-300 z-1 p-2 leading-2 shadow-lg rounded-md shadow-gray-300">
+             {IsBulkClicked&& <div className="absolute  w-68 bg-white border border-gray-300 z-1 p-2 leading-2 shadow-lg rounded-md shadow-gray-300">
                 <div className=" text-gray-500 flex items-center justify-between">
                   <span
-                    className="block text-sm
+                    className="block text-sm 
                   "
                   >
                     Bulk Add Parties
@@ -109,7 +105,7 @@ const Parties = () => {
                 <span className="text-xs">
                   Quickly add all your parties with Excel
                 </span>
-              </div>
+              </div>}
             </div>
             <Link href="/add-party">
               <button className="rounded-sm border py-2 px-4 text-white cursor-pointer  border-gray-300 bg-[#6a59ee] text-sm flex items-center gap-2 font-light">

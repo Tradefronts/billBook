@@ -8,7 +8,6 @@ interface InputProps {
   padding?:string;
   bgColor?:string
   textSize?:string
- 
 }
 
 const Input = ({ label, placeholder, id, width = "full", padding = "px-3 py-2", bgColor="white",textSize="xs" }: InputProps) => {
