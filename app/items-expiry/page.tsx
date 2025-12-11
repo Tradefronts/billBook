@@ -45,14 +45,12 @@ const columns = [
       </div>
       <div className="flex gap-2 text-sm">
         <div className="border rounded-md px-4 py-2 flex items-center gap-2 cursor-pointer">
-          {/* <Download size={16} /> */}
           <span>Hide out of stock batches</span>
          
           <Package size={15}/>
         </div>
 
         <div className="border rounded-md px-4  flex items-center gap-2">
-          {/* <Printer size={16} /> */}
           Items expiring in
            <div className="w-px h-full bg-gray-200"></div>
 
