@@ -22,6 +22,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
   id: string;
@@ -36,16 +38,24 @@ const columns: ColumnDef<Payment>[] = [
     header: "Date",
   },
   {
-    accessorKey: "paymentNumber",
-    header: "Payment Number",
+    accessorKey: "purchaseOrderNumber",
+    header: "Purchase Order Number",
   },
   {
     accessorKey: "partyName",
     header: "Party Name",
   },
   {
+    accessorKey: "validTill",
+    header: "Valid Till",
+  },
+  {
     accessorKey: "amount",
     header: "Amount",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
 ];
 
@@ -93,82 +103,99 @@ const PurchaseOrders = () => {
   });
 
   return (
-    <div className="h-full flex flex-col w-full px-5">
-      <div className="flex items-center justify-between py-3">
-        <h2 className="text-lg font-semibold">Purchase Orders</h2>
-        <button className="p-2 border border-gray-300 rounded-md">
-          <Settings size={15} className="text-gray-700" />
-        </button>
-      </div>
+    <div className="h-full flex flex-col w-full ">
+      <Header title="Purchase Orders" showSettingBtn={true} />
+      <div className="p-5 space-y-3">
+        <div className=" flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <ExpandableSearch placeholder="Search Purchase Order" />
+            <Select
+              width="w-80"
+              menus={[
+                "Today",
+                "Yesterday",
+                "This week",
+                "Last Week",
+                "This Month",
+                "Previous Month",
+                "Last 7 Days",
+                "Last 30 Days",
+                "This Quarter",
+                "Previous Quarter",
+                "Current Fiscal Year",
+                "Previous Fiscal Year",
+                "Last 365 days",
+              ]}
+            />
 
-      <div className="mt-5 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <ExpandableSearch placeholder="Search Payment In" />
-          <button className="flex items-center gap-2 border px-3 py-2 rounded-sm bg-white text-sm">
-            <Calendar size={18} className="text-gray-500" />
-            Last 365 Days
-            <ChevronDown size={18} />
-          </button>
+            <Select
+              menus={[
+                "Show All Challans",
+                "Show Open Challans",
+                "Show Closed Challans",
+              ]}
+            />
+          </div>
+
+          <Link href="/create-purchase-orders">
+            <button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
+              Create Purchase Orders
+            </button>
+          </Link>
         </div>
-
-        <Link href="/create-purchase-orders"><button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
-          Create Purchase Orders
-        </button>
-        </Link>
-      </div>
-
-      <div className="mt-4 rounded-lg border overflow-hidden">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                key={headerGroup.id}
-                className="bg-gray-50 hover:bg-gray-50 text-xs"
-              >
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="border-r border-gray-300"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="border-r  border-gray-300"
+        <div className=" rounded-lg border overflow-hidden">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow
+                  key={headerGroup.id}
+                  className="bg-gray-50 hover:bg-gray-50 text-xs"
+                >
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      className="border-r border-gray-300"
                     >
                       {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                        header.column.columnDef.header,
+                        header.getContext()
                       )}
-                    </TableCell>
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No Transactions Matching the current filter{" "}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+
+            <TableBody>
+              {table.getRowModel().rows.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className="border-r  border-gray-300"
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No Transactions Matching the current filter{" "}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

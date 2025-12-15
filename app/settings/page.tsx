@@ -44,7 +44,6 @@ const Settings = () => {
       <div className=" flex-1 overflow-auto ">
         <div className="">
           <div className="grid grid-cols-2 gap-24 p-5">
-            {/* LEFT COLUMN */}
             <div className="space-y-4">
               <div className=" flex items-center justify-center gap-4">
                 <label className="flex p-4 cursor-pointer flex-col items-center justify-center gap-1 rounded-sm  border-2 border-dashed border-blue-300 bg-slate-50 text-center text-xs text-slate-500">
@@ -188,7 +187,6 @@ const Settings = () => {
                 </div>
               </div>
             </div>
-
             <div className="space-y-4">
               <div className="">
                 <label className="mb-1 block text-xs font-medium text-slate-600">
@@ -219,13 +217,11 @@ const Settings = () => {
               <p className=" text-[11px] text-red-500">
                 Business registration type is not selected
               </p>
-
               <p className="mb-4 text-[11px] text-slate-700 bg-neutral-100 py-2.5 text-center">
                 <span className="font-semibold">Note:</span>Terms &amp;
                 Conditions and Signature added below will be shown on your
                 Invoices
               </p>
-
               <div className=" w-2/5">
                 <p className="mb-2 text-sm font-medium text-slate-600">
                   Signature
@@ -235,7 +231,6 @@ const Settings = () => {
                   <input type="file" className="hidden" />
                 </label>
               </div>
-
               <div className="rounded-lg border border-gray-300 ">
                 <div className="border-b border-gray-300 p-4">
                   <p className="mb-1 text-sm  text-slate-400">
@@ -246,7 +241,6 @@ const Settings = () => {
                     Website etc.
                   </p>
                 </div>
-
                 <div className="flex flex-col gap-3 md:flex-row p-5">
                   <input type="text" placeholder="Website" className="w-full rounded-md border border-slate-300 px-3 py-2 text-xs outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"/>
                   <span className="hidden items-center text-xs text-slate-500 md:flex">
@@ -264,7 +258,6 @@ const Settings = () => {
               </div>
             </div>
           </div>
-
           <div className="">
             <h5 className=" py-2 text-sm bg-gray-50 px-5 tracking-wider border-t border-gray-300">
               Company Settings

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ExpandableSearch from "@/components/ExpandableSearch";
 import { Settings } from "lucide-react";
 import Link from "next/link";
@@ -20,6 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
   id: string;
@@ -98,84 +100,90 @@ const CreditNote = () => {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-
   return (
-    <div className="w-full h-full flex flex-col px-5 py-3">
-      <div className="w-full flex items-center justify-between">
-        <h5 className="text-lg font-medium tracking-wide">Credit Note</h5>
-        <span className="block border rounded-xs border-gray-300 p-2">
-          <Settings size={18} />
-        </span>
-      </div>
-      <div className="mt-6 flex items-center justify-between">
-        <div>
-          <ExpandableSearch placeholder="Search Sales Return" />
+    <div className="w-full h-full flex flex-col ">
+      <Header title="Credit Note" showSettingBtn={true} />
+      <div className="p-5 space-y-3">
+        <div className=" flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <ExpandableSearch placeholder="Search Credit Note" />
+            <Select
+              showCalenederIcon={true}
+              menus={[
+                "Today",
+                "Yesterday",
+                "This week",
+                "Last Week",
+                "Last 7 days",
+                "This Month",
+                "Previous Month",
+                "Last 30 days",
+                "This Quarter",
+                "Previous Quarter",
+              ]}
+            />
+          </div>
+
+          <Link href="/create-credit-note">
+            <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-xs text-white px-5 py-2.5 font-medium">
+              Create Credit Note
+            </button>
+          </Link>
         </div>
 
-        <Link href="/create-credit-note">
-          <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-sm text-white px-5 py-2.5 font-medium">
-            Create Credit Note
-          </button>
-        </Link>
-      </div>
-
-      <div className="mt-4 rounded-lg border overflow-hidden">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                key={headerGroup.id}
-                className="bg-gray-50 text-xs"
-              >
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="border-r border-gray-300 font-medium"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody className="   h-96 overflow-auto
-    [&>*]:!bg-transparent 
-    [&>*]:!hover:bg-transparent
-    [&>*]:data-[state=selected]:!bg-transparent">
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="border-r  border-gray-300"
+        <div className=" rounded-lg border overflow-hidden">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id} className="bg-gray-50 text-xs">
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      className="border-r border-gray-300 font-medium"
                     >
                       {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                        header.column.columnDef.header,
+                        header.getContext()
                       )}
-                    </TableCell>
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="text-center"
-                >
-                  No Transactions Matching the current filter{" "}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              ))}
+            </TableHeader>
 
+            <TableBody
+              className="   h-96 overflow-auto
+    [&>*]:!bg-transparent 
+    [&>*]:!hover:bg-transparent
+    [&>*]:data-[state=selected]:!bg-transparent"
+            >
+              {table.getRowModel().rows.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className="border-r  border-gray-300"
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="text-center">
+                    No Transactions Matching the current filter{" "}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
     </div>
   );
 };

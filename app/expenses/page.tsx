@@ -22,6 +22,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
   id: string;
@@ -36,12 +38,16 @@ const columns: ColumnDef<Payment>[] = [
     header: "Date",
   },
   {
-    accessorKey: "paymentNumber",
-    header: "Payment Number",
+    accessorKey: "expenseNumber",
+    header: "Expense Number",
   },
   {
     accessorKey: "partyName",
     header: "Party Name",
+  },
+  {
+    accessorKey: "category",
+    header: "Category",
   },
   {
     accessorKey: "amount",
@@ -50,7 +56,6 @@ const columns: ColumnDef<Payment>[] = [
 ];
 
 const Expenses = () => {
-
   const data: Payment[] = [
     {
       date: "02 Dec 2025",
@@ -94,31 +99,39 @@ const Expenses = () => {
   });
 
   return (
-    <div className="h-full flex flex-col w-full px-5">
-      <div className="flex items-center justify-between py-3">
-        <h2 className="text-lg font-semibold">Expenses</h2>
-        <button className="p-2 border border-gray-300 rounded-md">
-          <Settings size={15} className="text-gray-700" />
-        </button>
-      </div>
-
-      <div className="mt-5 flex items-center justify-between gap-3">
+    <div className="h-full flex flex-col w-full ">
+      <Header title="Expenses" showReports={true} showSettingBtn={true} dropdownMenus={["Expense Transaction","Expense Category"]}/>
+      <div className="p-5 space-y-3">     
+         <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <ExpandableSearch placeholder="Search Payment In" />
-          <button className="flex items-center gap-2 border px-3 py-2 rounded-sm bg-white text-sm">
-            <Calendar size={18} className="text-gray-500" />
-            Last 365 Days
-            <ChevronDown size={18} />
-          </button>
+          <ExpandableSearch placeholder="Search Expense" />
+          <Select
+            width="w-80"
+            menus={[
+              "Today",
+              "Yesterday",
+              "This week",
+              "Last Week",
+              "This Month",
+              "Previous Month",
+              "Last 7 Days",
+              "Last 30 Days",
+              "This Quarter",
+              "Previous Quarter",
+              "Current Fiscal Year",
+              "Previous Fiscal Year",
+              "Last 365 days",
+            ]}
+          />
         </div>
 
-        <Link href="/create-expense"><button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
-          Create Expense
-        </button>
+        <Link href="/create-expense">
+          <button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
+            Create Expense
+          </button>
         </Link>
       </div>
-
-      <div className="mt-4 rounded-lg border overflow-hidden">
+      <div className=" rounded-lg border overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -172,6 +185,8 @@ const Expenses = () => {
         </Table>
       </div>
     </div>
+    </div>
+
   );
 };
 

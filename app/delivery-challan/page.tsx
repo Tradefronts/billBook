@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import DropdownMenu from "@/components/DropdownMenu";
 import Select from "@/components/Select";
+import Header from "@/components/Header";
 
 type Payment = {
   id: string;
@@ -102,23 +103,21 @@ const DeliveryChallan = () => {
 
 
   return (
-    <div className="w-full h-full flex flex-col px-5 py-3">
-      <div className="w-full flex items-center justify-between">
-        <h5 className="text-lg font-medium tracking-wide">Delivery Challan</h5>
-        <span className="block border rounded-xs border-gray-300 p-2">
-          <Settings size={18} />
-        </span>
-      </div>
-      <div className="mt-6 flex items-center justify-between">
+    <div className="w-full h-full flex flex-col">
+      <Header title="Delivery Challan" showSettingBtn={true} />
+
+
+<div className="p-5">
+      <div className=" flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ExpandableSearch placeholder="Search Sales Return" />
+          <ExpandableSearch placeholder="Search Delivery CHallan" />
           <Select width="w-80" menus={["Today", "Yesterday", "This week","Last Week","This Month","Previous Month","Last 7 Days","Last 30 Days","This Quarter","Previous Quarter","Current Fiscal Year","Previous Fiscal Year","Last 365 days"]} />
 
           <Select menus={["Show All Challans","Show Open Challans","Show Closed Challans"]}/>
         </div>
 
         <Link href="/create-delivery-challan">
-          <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-sm text-white px-5 py-2.5 font-medium">
+          <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-xs text-white px-5 py-2.5 font-medium">
             Create Delivery Challan
           </button>
         </Link>
@@ -180,7 +179,7 @@ const DeliveryChallan = () => {
           </TableBody>
         </Table>
       </div>
-
+      </div>
     </div>
   );
 };

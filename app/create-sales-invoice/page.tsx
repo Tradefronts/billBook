@@ -14,13 +14,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { useRouter } from "next/navigation";
 
 const CreateSalesInvoice = () => {
+  const router=useRouter()
   return (
     <div className="flex h-full w-full flex-col bg-white text-sm text-gray-800">
       <div className="flex items-center justify-between border-b border-gray-300 px-5 py-2">
         <div className="flex items-center gap-2">
-          <ArrowLeft size={20} />
+          <button onClick={()=>router.back()} className="cursor-pointer"><ArrowLeft size={20} /></button>
           <h5 className="text-sm font-medium">Create Sales Invoice</h5>
         </div>
         <div className="flex items-center gap-2">

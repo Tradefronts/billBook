@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import Link from "next/link";
 import React from "react";
 
@@ -24,9 +25,7 @@ const AutomatedBilling = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="w-full border border-gray-300 py-3 px-5">
-        <h5>Automated Bills</h5>
-      </div>
+      <Header title="Automated Bills"/>
       <div className="w-6xl mx-auto mt-5">
         <div className="w-full grid grid-cols-3 gap-12">
                   {billingFeatures.map((feature, index) => {

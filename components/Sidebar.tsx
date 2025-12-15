@@ -89,6 +89,7 @@ const Sidebar = () => {
           name: "reports",
           icon: <FileChartColumn size={18} />,
           hasDropdown: false,
+          path:"/report"
         },
       ],
     },
@@ -129,7 +130,7 @@ const Sidebar = () => {
     {
       section: "Business Tools",
       items: [
-        { name: "staff attendance & payroll", icon: <Users size={18} /> },
+        { name: "staff attendance & payroll", icon: <Users size={18} />,path:"/staff-attendance-payroll" },
         {
           name: "manage users",
           icon: <Package size={18} />,
@@ -218,7 +219,7 @@ const Sidebar = () => {
     { label: "Print Settings", path: "/print-settings" },
     { label: "Manage Users", path: "/user-management" },
     { label: "Reminders", path: "/reminders" },
-    { label: "CA Reports Sharing", path: "/ca-reports-sharing" },
+    { label: "CA Reports Sharing", path: "/ca-report-sharing" },
     { label: "Pricing", path: "/pricing" },
     { label: "Refer & Earn", path: "/refer-earn" },
     { label: "Help And Support", path: "/help-support" },

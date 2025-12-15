@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   ArrowRight,
   ChevronDown,
@@ -15,29 +15,45 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 import DropdownMenu from "@/components/DropdownMenu";
+import Header from "@/components/Header";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { AddModal, EditModal, SharedLedger } from "@/components/Modal";
+import ExpandableSearch from "@/components/ExpandableSearch";
+import SelectWithInput from "@/components/SelectWithInput";
 
 const Parties = () => {
+  const [isBulkClicked, setIsBulkClicked] = useState(false);
+  const [isSharedLedgerClicked, setIsSharedLedgerClicked] = useState(false);
+  const [isEditOpen, setIsEditOpen]=useState(false)
+  const [isAddOpen, setIsAddOpen] = useState(false)
 
-
-  const [IsBulkClicked, setIsBulkClicked]=useState(false)
 
   return (
-    <div className="w-full p-5 ">
-      <div className="space-y-5">
-        <div className="flex items-center justify-between">
-          <h5 className="font-medium text-xl">Parties</h5>
-          <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1 border rounded-xs px-3 py-2  border-purple-600 text-purple-700 font-light text-xs">
-              <Link2 size={15} /> SharedLedger Portal
-            </button>
-              <DropdownMenu/>
-            <button className="p-2 border rounded-xs border-gray-300">
-              <Settings size={15} />
-            </button>
-            <div></div>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 w-full mt-8 gap-3">
+    <div className="w-full h-full flex flex-col">
+      <Header
+        title="Parties"
+        dropdownMenus={[
+          "Partywise Outstanding",
+          "Item Report By Party",
+          "Receivable ageing Report",
+        ]}
+        isSharedLedgerClicked={isSharedLedgerClicked}
+        setIsSharedLedgerClicked={setIsSharedLedgerClicked}
+        showSharedLedgerBtn={true}
+        showReports={true}
+        showSettingBtn={true}
+      />
+      <div className="p-5 space-y-5 ">
+        <div className="grid grid-cols-3 w-full  gap-3 ">
           <div className="border rounded-lg border-purple-300 p-3 space-y-3 bg-[#f1f0fc]">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-purple-500">
@@ -68,47 +84,40 @@ const Parties = () => {
             <span className="text-xl font-semibold">RS 100</span>
           </div>
         </div>
-
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button className="p-2.5 border rounded-sm border-gray-300 hover:border-gray-500 cursor-pointer">
-              <Search size={15} className="text-gray-500" />
-            </button>
-            <div className="border border-gray-300 rounded-sm text-sm relative w-56">
-              <input
-                type="text"
-                placeholder="Search Categories"
-                className="p-2 w-full"
-              />
-              <span className="absolute top-0 right-0 h-full flex items-center pr-2 text-gray-400">
-                <ChevronDown size={20} />
-              </span>
-            </div>
+            <ExpandableSearch placeholder="Search Party"/>
+            <SelectWithInput placeholder="Search Categories" items={["hey", "hello"]} isEditOpen={isEditOpen} setIsEditOpen={setIsEditOpen} setIsAddOpen={setIsAddOpen} isAddOpen={isAddOpen}/>
           </div>
           <div className=" flex items-center gap-4 ">
             <div className="relative">
-              <button onClick={()=>setIsBulkClicked(!IsBulkClicked)} className="cusor-pointer rounded-sm border p-2 border-gray-300 text-gray-500 text-sm  flex items-center gap-2">
-                <Layers size={15} /> Bulk Actions <ChevronDown size={20} />
+              <button
+                onClick={() => setIsBulkClicked(!isBulkClicked)}
+                className="cursor-pointer rounded-xs border p-2 border-gray-300 text-gray-500 text-sm  flex items-center gap-2"
+              >
+                <Layers size={15} className="text-gray-700"/> Bulk Actions <ChevronDown size={15} />
               </button>
-             {IsBulkClicked&& <div className="absolute  w-68 bg-white border border-gray-300 z-1 p-2 leading-2 shadow-lg rounded-md shadow-gray-300">
-                <div className=" text-gray-500 flex items-center justify-between">
-                  <span
-                    className="block text-sm 
+              {isBulkClicked && (
+                <div className="absolute  w-68 bg-white border border-gray-300 z-1 p-2 leading-2 shadow-lg rounded-xs shadow-gray-300">
+                  <div className=" text-gray-500 flex items-center justify-between">
+                    <span
+                      className="block text-sm 
                   "
-                  >
-                    Bulk Add Parties
-                  </span>
-                  <span className="">
-                    <ArrowRight size={20} />
+                    >
+                      Bulk Add Parties
+                    </span>
+                    <span className="">
+                      <ArrowRight size={20} />
+                    </span>
+                  </div>
+                  <span className="text-xs">
+                    Quickly add all your parties with Excel
                   </span>
                 </div>
-                <span className="text-xs">
-                  Quickly add all your parties with Excel
-                </span>
-              </div>}
+              )}
             </div>
             <Link href="/add-party">
-              <button className="rounded-sm border py-2 px-4 text-white cursor-pointer  border-gray-300 bg-[#6a59ee] text-sm flex items-center gap-2 font-light">
+              <button className="rounded-xs border py-2 px-7 text-white cursor-pointer  border-gray-300 bg-[#4c3cce] text-sm flex items-center gap-2 font-medium">
                 Create Party
               </button>
             </Link>
@@ -193,6 +202,13 @@ const Parties = () => {
           </table>
         </div>
       </div>
+      <SharedLedger
+        title="SharedLedger Portal"
+        isSharedLedgerClicked={isSharedLedgerClicked}
+        setIsSharedLedgerClicked={setIsSharedLedgerClicked}
+      />
+      <EditModal isEditOpen={isEditOpen} setIsEditOpen={setIsEditOpen}/>
+      <AddModal title="Add New Category" isAddOpen={isAddOpen} setIsAddOpen={setIsAddOpen}/>
     </div>
   );
 };

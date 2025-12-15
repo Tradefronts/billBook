@@ -22,6 +22,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
   id: string;
@@ -93,28 +95,34 @@ const PaymentIn = () => {
   });
 
   return (
-    <div className="h-full flex flex-col w-full px-5">
-      <div className="flex items-center justify-between py-3">
-        <h2 className="text-lg font-semibold">Payment In</h2>
-        <button className="p-2 border border-gray-300 rounded-md">
-          <Settings size={15} className="text-gray-700" />
-        </button>
-      </div>
+    <div className="h-full flex flex-col w-full ">
+      <Header title="Payment In" showSettingBtn={true}/>
+
+<div className="p-5">
 
       <div className="flex items-center gap-6 border-b text-sm pb-1">
         <button className="text-purple-700 font-medium border-b-2 border-purple-700 pb-1">
           Payment Received
         </button>
       </div>
-
       <div className="mt-5 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <ExpandableSearch placeholder="Search Payment In" />
-          <button className="flex items-center gap-2 border px-3 py-2 rounded-sm bg-white text-sm">
-            <Calendar size={18} className="text-gray-500" />
-            Last 365 Days
-            <ChevronDown size={18} />
-          </button>
+            <Select
+              showCalenederIcon={true}
+              menus={[
+                "Today",
+                "Yesterday",
+                "This week",
+                "Last Week",
+                "Last 7 days",
+                "This Month",
+                "Previous Month",
+                "Last 30 days",
+                "This Quarter",
+                "Previous Quarter",
+              ]}
+            />
         </div>
 
         <Link href="/create-payment-in"><button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
@@ -122,7 +130,6 @@ const PaymentIn = () => {
         </button>
               </Link>
       </div>
-
       <div className="mt-4 rounded-lg border overflow-hidden">
         <Table>
           <TableHeader>
@@ -175,6 +182,7 @@ const PaymentIn = () => {
             )}
           </TableBody>
         </Table>
+      </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 import { ChevronDown, FileChartColumnIncreasing } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type DropdownMenuProps = {
   menus?: string[];
@@ -9,24 +9,36 @@ type DropdownMenuProps = {
   label?: string;
 };
 const DropdownMenu = ({
-  menus = [
-    "Partywise Outstanding",
-    "Item Report By Party",
-    "Receivable ageing Report",
-  ],
-  name = "Reports",
+  menus,
+  name,
   icon = true,
   label,
 }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="relative">
+    <div ref={dropdownRef} className="relative inline-block">
       <div className="w-44">
         {label&&<label className="text-sm">{label}</label>}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="cursor-pointer px-3 py-1.5 rounded-xs border border-gray-300 text-blue-500 text-sm w-full flex items-center justify-between"
+          className="cursor-pointer px-3 py-1.5 rounded-xs border border-blue-300 text-blue-500 text-sm w-full flex items-center justify-between"
         >
           <div className="flex items-center gap-2">
             {icon && <FileChartColumnIncreasing size={15} />}

@@ -20,6 +20,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
     id: string;
@@ -100,15 +102,11 @@ const PurchaseInvoice = () => {
 
 
     return (
-        <div className="w-full h-full flex flex-col px-5 py-3">
-            <div className="w-full flex items-center justify-between">
-                <h5 className="text-lg font-medium tracking-wide">Purchase Invoices</h5>
-                <span className="block border rounded-xs border-gray-300 p-2">
-                    <Settings size={18} />
-                </span>
-            </div>
-
-            <div className="grid grid-cols-3 w-full mt-2 gap-3">
+        <div className="w-full h-full flex flex-col">
+            <Header title="Purchase Invoices" showSettingBtn={true} showReports={true} dropdownMenus={["GSTR-2 (Purchase)","DayBook"]}/>
+           <div className="p-5 space-y-3">
+           
+            <div className="grid grid-cols-3 w-full  gap-3">
                 <div className="border rounded-lg border-gray-300 p-3 space-y-3 bg-linear-to-r from-green-50 to-white">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-green-700">
@@ -154,20 +152,33 @@ const PurchaseInvoice = () => {
                 </div>
 
             </div>
-
-            <div className="mt-6 flex items-center justify-between">
-                <div>
-                    <ExpandableSearch placeholder="Search Sales Return" />
+            <div className=" flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <ExpandableSearch placeholder="Search Purchase Invoice" />
+                        <Select
+                            showCalenederIcon={true}
+                            menus={[
+                                "Today",
+                                "Yesterday",
+                                "This week",
+                                "Last Week",
+                                "Last 7 days",
+                                "This Month",
+                                "Previous Month",
+                                "Last 30 days",
+                                "This Quarter",
+                                "Previous Quarter",
+                            ]}
+                        />
                 </div>
 
                 <Link href="/create-proforma-invoice">
-                    <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-sm text-white px-5 py-2.5 font-medium">
+                    <button className="bg-[#4c3cce] cursor-pointer text-xs rounded-xs text-white px-5 py-2.5 font-medium">
                         Create Purchase Invoice
                     </button>
                 </Link>
             </div>
-
-            <div className="mt-4 rounded-lg border overflow-hidden">
+            <div className=" rounded-lg border overflow-hidden">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -223,7 +234,7 @@ const PurchaseInvoice = () => {
                     </TableBody>
                 </Table>
             </div>
-
+            </div>
         </div>
     );
 };

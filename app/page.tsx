@@ -1,3 +1,4 @@
+"use client";
 import {
   ArrowDown,
   ArrowRight,
@@ -9,46 +10,54 @@ import {
   MessagesSquare,
   Monitor,
   RefreshCcw,
+  X,
 } from "lucide-react";
-import Image from "next/image";
-
+import Header from "../components/Header";
+import { useState } from "react";
 export default function Home() {
+  const [isDemoShow, setIsDemoShow] = useState(true);
+
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full border-b px-5 py-1.5 border-gray-300 flex items-center justify-between">
-        <h5>Dashboard</h5>
-        <div className="flex items-center gap-5 text-gray-600">
-          <Monitor size={20} />
-          <Megaphone size={20} />
-          <Gift size={20} />
-          <MessagesSquare size={20} className="text-blue-400" />
-          <button className="bg-[#e7f4fd] text-blue-400 px-5 py-1 rounded-md">
-            Book Demo
-          </button>
-        </div>
-      </div>
-      <div className="p-5 flex-1 overflow-auto">
-        <div className="border p-5 text-sm border-gray-300 w-full  rounded-xl bg-[#f3ede6] hover:shadow-md shadow-black/20">
-          <div className="space-y-3">
-            <span className="block font-semibold tracking-wide">
-              Book Free Demo
-            </span>
-            <span className="block font-light">
-              Get a personalised tour from our <br />
-              solution expert
-            </span>
-            <button className="font-semibold  flex items-center gap-2">
-              Book Demo Now <ArrowRight size={20} />
-            </button>
+      <Header
+        title="Dashboard"
+        showBackBtn={false}
+        showDemoBtn={true}
+        showMessagBtn={true}
+      />
+      <div className="p-5 space-y-5 flex-1 overflow-auto">
+        {isDemoShow && (
+          <div className="relative">
+            <div className="border p-5 text-sm border-gray-300 w-full  rounded-xl bg-[#f3ede6] hover:shadow-md shadow-black/20">
+              <div className="space-y-3">
+                <span className="block font-semibold tracking-wide">
+                  Book Free Demo
+                </span>
+                <span className="block font-light">
+                  Get a personalised tour from our <br />
+                  solution expert
+                </span>
+                <button className="font-semibold  flex items-center gap-2">
+                  Book Demo Now <ArrowRight size={20} />
+                </button>
+              </div>
+              <div></div>
+            </div>
+            <button onClick={()=>setIsDemoShow(false)} className="absolute -right-2 -top-2 bg-gray-100 border rounded-full p-1 cursor-pointer"><X className="" size={15}/></button>
           </div>
-          <div></div>
-        </div>
-        <div className="py-10 space-y-5">
+        )}
+        <div className=" space-y-5">
           <div className="flex items-center justify-between">
             <h6 className="font-semibold">Business Overview</h6>
-            <div className="bg-gray-100 flex items-center px-3 text-sm rounded-md py-1">
-              <span className="text-neutral-400">Last update :</span>
-              <RefreshCcw className="text-blue-300 " size={15} />
+            <div className="bg-gray-100 flex items-center gap-2 px-3 text-xs rounded-xs py-1">
+              <div>
+                <span className="text-neutral-400">Last update :</span>
+                <span className="text-gray-800">12 Dec 2025 | 11:05 pm</span>
+              </div>
+              <button className="cursor-pointer">
+                {" "}
+                <RefreshCcw className="text-blue-500 " size={15} />
+              </button>
             </div>
           </div>
           <div className="grid grid-cols-3 w-full mt-2 gap-3">
@@ -97,7 +106,7 @@ export default function Home() {
           </div>
           <div className=" w-full grid grid-cols-3 items-start gap-3">
             <div className=" col-span-2 space-y-5">
-              <div className="rounded-lg border border-gray-300 rounded-lg">
+              <div className=" border border-gray-300 rounded-lg">
                 <h5 className="font-semibold border-b px-5 py-2 text-sm border-gray-300">
                   Latest Transactions
                 </h5>
@@ -181,9 +190,7 @@ export default function Home() {
                   See All Transactions
                 </button>
               </div>
-              <div className="w-full border border-gray-300 h-48 rounded-lg ">
-
-              </div>
+              <div className="w-full border border-gray-300 h-48 rounded-lg "></div>
             </div>
 
             <div className=" rounded-lg border border-gray-300">

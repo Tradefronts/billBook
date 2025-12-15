@@ -22,6 +22,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
 
 type Payment = {
   id: string;
@@ -36,16 +38,24 @@ const columns: ColumnDef<Payment>[] = [
     header: "Date",
   },
   {
-    accessorKey: "paymentNumber",
-    header: "Payment Number",
+    accessorKey: "debitNoteNumber",
+    header: "Debit Note Number",
   },
   {
     accessorKey: "partyName",
     header: "Party Name",
   },
   {
+    accessorKey: "purchaseNumber",
+    header: "Purchase Number",
+  },
+  {
     accessorKey: "amount",
     header: "Amount",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
   },
 ];
 
@@ -93,31 +103,35 @@ const DebitNote = () => {
   });
 
   return (
-    <div className="h-full flex flex-col w-full px-5">
-      <div className="flex items-center justify-between py-3">
-        <h2 className="text-lg font-semibold">Debit Note</h2>
-        <button className="p-2 border border-gray-300 rounded-md">
-          <Settings size={15} className="text-gray-700" />
-        </button>
-      </div>
-
-      <div className="mt-5 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <ExpandableSearch placeholder="Search Payment In" />
-          <button className="flex items-center gap-2 border px-3 py-2 rounded-sm bg-white text-sm">
-            <Calendar size={18} className="text-gray-500" />
-            Last 365 Days
-            <ChevronDown size={18} />
-          </button>
-        </div>
+    <div className="h-full flex flex-col w-full">
+      <Header title="Debit Note" showSettingBtn={true} />
+      <div className="p-5 space-y-3">
+      <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <ExpandableSearch placeholder="Search Debit Note" />
+            <Select
+              showCalenederIcon={true}
+              menus={[
+                "Today",
+                "Yesterday",
+                "This week",
+                "Last Week",
+                "Last 7 days",
+                "This Month",
+                "Previous Month",
+                "Last 30 days",
+                "This Quarter",
+                "Previous Quarter",
+              ]}
+            />
+          </div>
 
         <Link href="/create-debit-note"><button className="cursor-pointer border px-4 py-2 rounded-xs text-sm font-semibold bg-[#4c3cce] text-white">
           Create Debit Note
         </button>
         </Link>
       </div>
-
-      <div className="mt-4 rounded-lg border overflow-hidden">
+      <div className=" rounded-lg border overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -169,6 +183,7 @@ const DebitNote = () => {
             )}
           </TableBody>
         </Table>
+      </div>
       </div>
     </div>
   );

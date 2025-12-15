@@ -1,33 +1,18 @@
-// app/cash-and-bank/page.tsx
+"use client"
 import { Download, Calendar, Landmark } from "lucide-react";
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select";
+import Header from "@/components/Header";
+import Select from "@/components/Select";
+import { useState } from "react";
+import { AdjustBalanceModal, TransferBalanceModal } from "@/components/Modal";
 
 const CashAndBank = () => {
+  const [adjustBalanceOpen,setAdjustBalanceOpen]=useState(false)
+  const [transferBalanceOpen, setTransferBalanceOpen] = useState(false)
+
+
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="border-b border-gray-200 px-5 py-2">
-        <div className="flex items-center justify-between">
-          <h1 className=" font-semibold text-gray-900">Cash and Bank</h1>
-          <div className="flex gap-3 text-xs">
-            <button className="px-4 py-1.5 border border-gray-300 rounded-sm flex items-center gap-1">
-              <span className="font-semibold">±</span>
-              Add/Reduce Money
-            </button>
-            <button className="px-4 py-1.5 border border-gray-300 rounded-sm flex items-center gap-1">
-              <span className="font-semibold">±</span>
-              Transfer Money
-            </button>
-            <button className="px-4 py-1.5 border border-gray-300 rounded-sm flex items-center gap-1">
-              <span className="font-semibold">+</span>
-              Add new acoount
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <Header title="Cash and Bank" transferBalanceOpen={transferBalanceOpen} setTransferBalanceOpen={setTransferBalanceOpen} showAddReduceBtn={true} showTransferMoneyBtn={true} showAddNewAccount={true} setAdjustBalanceOpen={setAdjustBalanceOpen} adjustBalanceOpen={adjustBalanceOpen}/>
       <div className="flex-1 overflow-auto flex ">
         <div className="w-96 border-r border-gray-200 min-h-screen">
           <div className="p-5 flex justify-between items-center">
@@ -40,7 +25,7 @@ const CashAndBank = () => {
             <div className="px-6 py-3 bg-gray-50 border-y border-gray-300">
               <h2 className="text-sm font-medium text-gray-600">Cash</h2>
             </div>
-            <button className="w-full px-5 py-7 cursor-pointer flex items-center justify-between">
+            <button className="w-full px-5 py-7 cursor-pointer flex items-center justify-between bg-violet-100">
               <span className="block text-sm text-gray-700">Cash in hand</span>
               <span className="block text-sm font-medium text-gray-900">
                 ₹15
@@ -79,7 +64,7 @@ const CashAndBank = () => {
 
           <div className=" px-5 py-4 border-y  border-gray-300">
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2 border border-gray-300 rounded-md py-2 px-4">
+              {/* <div className="flex items-center gap-2 border border-gray-300 rounded-md py-2 px-4">
                 <Calendar className=" w-4 h-4 text-gray-400 pointer-events-none" />
                 <NativeSelect className="outline-none">
                   <NativeSelectOption value="today" className="">
@@ -110,8 +95,25 @@ const CashAndBank = () => {
                     Last 30 Days
                   </NativeSelectOption>
                 </NativeSelect>
-              </div>
-
+              </div> */}
+              <Select
+                width="w-80"
+                menus={[
+                  "Today",
+                  "Yesterday",
+                  "This week",
+                  "Last Week",
+                  "This Month",
+                  "Previous Month",
+                  "Last 7 Days",
+                  "Last 30 Days",
+                  "This Quarter",
+                  "Previous Quarter",
+                  "Current Fiscal Year",
+                  "Previous Fiscal Year",
+                  "Last 365 days",
+                ]}
+              />
               <button className="px-2 py-1.5 border border-gray-300 rounded-sm text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-3">
                 Download Statement
                 <Download className="text-slate-400" size={15} />
@@ -181,6 +183,8 @@ const CashAndBank = () => {
           </div>
         </div>
       </div>
+      <AdjustBalanceModal adjustBalanceOpen={adjustBalanceOpen} setAdjustBalanceOpen={setAdjustBalanceOpen}/>
+      <TransferBalanceModal setTransferBalanceOpen={setTransferBalanceOpen} transferBalanceOpen={transferBalanceOpen}/>
     </div>
   );
 };

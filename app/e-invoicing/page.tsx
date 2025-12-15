@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import React from "react";
 
 const EInvoicing = () => {
@@ -9,12 +10,7 @@ const EInvoicing = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="w-full border border-gray-300 py-3 px-5 flex items-center justify-between">
-        <h5>e-Invoicing</h5>
-        <button className="bg-blue-50 text-blue-500 text-xs font-medium px-3 py-2 rounded-sm ">
-          Chat Support
-        </button>
-      </div>
+      <Header title="e-Invoicing" showChatBtn={true} />
       <div className="w-4/5 mx-auto mt-5">
         <div className="w-full grid grid-cols-3 gap-5">
           {invoices.map((invoice, index) => {
