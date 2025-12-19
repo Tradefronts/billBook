@@ -1,5 +1,5 @@
 "use client";
-import DropdownMenu from "@/components/DropdownMenu";
+import DropdownMenu from "@/components/Dropdown";
 import Input from "@/components/Input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";

@@ -2,7 +2,7 @@
 import { ArrowLeft, Link2, MessageCircle, MessagesSquare, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import DropdownMenu from "./DropdownMenu";
+import Dropdown from "./Dropdown";
 
 type HeaderProps = {
   title?: string;
@@ -68,7 +68,7 @@ const Header = ({
           </button>
         )}
         {showReports && (
-          <DropdownMenu
+          <Dropdown
             menus={dropdownMenus}
             name="Reports"
           />

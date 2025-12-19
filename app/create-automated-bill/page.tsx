@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Input from "@/components/Input";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { NativeSelerct, NativeSelectOption } from "@/components/ui/native-select";
 import { Checkbox } from "@radix-ui/react-checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Label } from "@radix-ui/react-label";

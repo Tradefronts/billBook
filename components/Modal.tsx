@@ -11,7 +11,7 @@ import {
 import {  CalendarDays, Plus, X } from "lucide-react";
 import { Button } from "./ui/button";
 import Input from "./Input";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./Dropdown";
 import Select from "./Select";
 import { useState } from "react";
 const Modal = ({ children }) => {
