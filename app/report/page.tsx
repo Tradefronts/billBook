@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Span } from "next/dist/trace";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import path from "path";
 import { title } from "process";
 import React, { useState } from "react";
 
@@ -22,8 +24,8 @@ const categories = [
     icon: <UserStar />,
     items: [
       { name: "Balance Sheet", path: "/balance-sheet" },
-      { name: "GSTR-1 (Sales)" },
-      { name: "Profit And Loss Report" },
+      { name: "GSTR-1 (Sales)",path:"/report-GSTR-1-sales" },
+      { name: "Profit And Loss Report",path:"/report-profit-loss"  },
       { name: "Sales Summary", path: "/report-sales-summary"},
     ],
   },
@@ -31,15 +33,15 @@ const categories = [
     title: "GST",
     icon: <SquarePercent />,
     items: [
-      { name: "GSTR-2 (Purchase)" },
-      { name: "GSTR-3b" },
-      { name: "GST Purchase (With HSN)" },
-      { name: "GST Sales (With HSN)" },
-      { name: "HSN Wise Sales Summary" },
-      { name: "TDS Payable" },
-      { name: "TDS Receivable" },
-      { name: "TCS Payable" },
-      { name: "TCS Receivable" },
+      { name: "GSTR-2 (Purchase)",path:"/report-gstr-2" },
+      { name: "GSTR-3b",path:"/report-gstr-3b" },
+      { name: "GST Purchase (With HSN)",path: "/report-gst-purchase" },
+      { name: "GST Sales (With HSN)",path: "/report-gst-sales" },
+      { name: "HSN Wise Sales Summary", path: "/report-hsn-wise-sales-summary"},
+      { name: "TDS Payable",path: "/report-tds-payable" },
+      { name: "TDS Receivable",path: "/report-tds-receivable" },
+      { name: "TCS Payable" ,path: "/report-tcs-payable"},
+      { name: "TCS Receivable",path: "/report-tcs-receivable" },
     ],
   },
   {
@@ -47,35 +49,35 @@ const categories = [
     icon: <StickyNote />,
     items: [
       { name: "Audit Trail" },
-      { name: "Bill Wise Profit" },
-      { name: "Cash and Bank Report (All Payments)" },
-      { name: "Daybook" },
-      { name: "Expense Category Report" },
-      { name: "Expense Transaction Report" },
-      { name: "Purchase Summary" },
+      { name: "Bill Wise Profit",path: "/report-bill-wise-profit" },
+      { name: "Cash and Bank Report (All Payments)",path: "/report-cash&bank-report" },
+      { name: "Daybook",path: "/report-daybook" },
+      { name: "Expense Category Report",path: "/report-expense-category-report" },
+      { name: "Expense Transaction Report",path: "/report-expense-transaction-report" },
+      { name: "Purchase Summary",path: "/report-purchase-summary" },
     ],
   },
   {
     title: "Item",
     icon: <Package />,
     items: [
-      { name: "Item Report By Party" },
-      { name: "Item Sales and Purchase Summary" },
-      { name: "Low Stock Summary" },
-      { name: "Rate List" },
-      { name: "Stock Detail Report" },
-      { name: "Stock Summary" },
+      { name: "Item Report By Party",path:"/report-item-report-by-party" },
+      { name: "Item Sales and Purchase Summary",path:"/report-itemsales-purchasesummary"  },
+      { name: "Low Stock Summary",path:"/report-lowstock-summary"  },
+      { name: "Rate List",path:"/report-rate-list" },
+      { name: "Stock Detail Report",path:"/report-stock-details-report" },
+      { name: "Stock Summary",path:"/report-stock-summary" },
     ],
   },
   {
     title: "Party",
     icon: <UsersRound />,
     items: [
-      { name: "Receivable Ageing Report" },
-      { name: "Party Report By Item" },
-      { name: "Party Statement (Ledger)" },
-      { name: "Party Wise Outstanding" },
-      { name: "Sales Summary - Category Wise" },
+      { name: "Receivable Ageing Report",path:"/report-receivable-ageing-report" },
+      { name: "Party Report By Item",path:"/report-party-report-by-item" },
+      { name: "Party Statement (Ledger)",path:"/report-party-statement" },
+      { name: "Party Wise Outstanding",path:"/report-party-wise-outstanding" },
+      { name: "Sales Summary - Category Wise",path:"/report-salessummary-categorywise" },
     ],
   },
   { title: "", icon: "", items: [] },
@@ -149,7 +151,7 @@ const Report = () => {
                     {visibleItems.map((cat, ind) => (
                       <Link key={ind} href={cat.path ? cat.path : "#"}>
                         <div className="flex justify-between p-5">
-                          <span className="block bg-amber-800">{cat.name}</span>
+                          <span className="block">{cat.name}</span>
                           {category.title === "Favourite" ? (
                             <Star size={15} />
                           ) : (
